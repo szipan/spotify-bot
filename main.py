@@ -20,7 +20,6 @@ from spotify_song import SpotifySongModel
 #     "proxyType": "MANUAL",
 # }
 
-processNum = 1              # 同时登录的账号数量
 loginRetryTimes = 3         # 登录重试次数
 musicPlayTime = 55          # 单位秒 + 默认缓冲5s
 playRetryTimes = 3          # 播放重试次数
@@ -30,17 +29,19 @@ loopTime = 3                # 循环播放次数
 PROXY = ["127.0.0.1:7890"]
 
 userPwdList = [
-    ('zipansong@nwcdcloud.cn', 'Xsw@3edcvfr4'),
+    ('adambandura.g@gmail.com', 'adam.bandura'),
 ]
+
+processNum = len(userPwdList)              # 同时登录的账号数量
 
 urlsList = [
     # 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M',
-    'https://open.spotify.com/track/0CUNKIlXEHFoQG3ePClG2n?si=7d33d24c51094431',
+    'https://open.spotify.com/track/302TLuYhjWgiAOSxyEpoMM?si=4186ea8605b34f50',
 ]
 
 if not SpotifySongModel.exists():
     SpotifySongModel.create_table(
-        read_capacity_units=1, write_capacity_units=1)
+        read_capacity_units=100, write_capacity_units=100)
 
 for uli in range(len(urlsList)):
     song = SpotifySongModel('url%d' % uli)
